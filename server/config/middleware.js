@@ -11,7 +11,7 @@ module.exports = (app, express, passport) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(express.static(path.join(__dirname, '../../', 'dist')));
-  app.use(favicon(path.join(__dirname, '../../', 'dist', 'images', 'icons', 'favicon', 'favicon.ico')));
+  // app.use(favicon(path.join(__dirname, '../../', 'dist', 'images', 'icons', 'favicon', 'favicon.ico')));
   app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:5000");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
