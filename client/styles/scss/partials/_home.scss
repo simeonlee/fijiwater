@@ -1,0 +1,124 @@
+.intro, .bio {
+  /* fallback for older browsers. */
+  height: 100%;
+  width: 100%;
+  /* Set the height to match that of the viewport. */
+  height: 100vh;
+  width: 100vw;
+}
+
+.intro {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background:
+    linear-gradient(
+      // 90deg,
+      rgba(255, 255, 255, 0),
+      $solid-nearly-black
+    ),
+    url(../../images/background/westside-bw.jpg) no-repeat center center /*fixed*/;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.intro-name {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  font-family: $major;
+  font-style: italic;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+  color: white;
+  // @media (min-width: 800px) {
+  //   font-size: 30px;
+  // }
+  // @media (min-width: 1200px) {
+  //   font-size: 40px;
+  // }
+}
+
+.intro-inspiration {
+  // position: absolute;
+  // top: 30%;
+  // left: 15%;
+  width: 80%;
+  font-family: $major;
+  font-style: italic;
+  // letter-spacing: 2px;
+  font-size: 3.6em;
+  color: white;
+  line-height: 1.2em;
+
+  // transition: all ease-in .5s;
+  // -moz-transition: all ease-in .5s;
+  // -webkit-transition: all ease-in .5s;
+  // -o-transition: all ease-in .5s;
+}
+
+.bio {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 0.9em;
+  line-height: 1.9em;
+  background-color: $solid-nearly-black;
+}
+
+.bio-container {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bio-letter {
+  font-family: $major;
+  font-style: italic;
+  font-size: 34em;
+  color: rgba(255, 255, 255, 1.0);
+  z-index: 9999999;
+  float: left;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  // transform: scale(1.2,1);
+  // -webkit-transform: scale(1.2,1); /* Safari and Chrome */
+  // -moz-transform: scale(1.2,1); /* Firefox */
+  // -ms-transform: scale(1.2,1); /* IE 9+ */
+  // -o-transform: scale(1.2,1); /* Opera */
+}
+
+.bio-right {
+  float: right;
+  width: 50%;
+}
+
+.bio-title {
+  font-family: $minor;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: left;
+}
+
+.bio-text {
+  margin-top: 20px;
+  font-family: georgia, serif;
+  font-style: italic;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  letter-spacing: 0.8px;
+}

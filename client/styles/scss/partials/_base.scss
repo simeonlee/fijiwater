@@ -1,0 +1,87 @@
+/* Typefaces */
+$major: 'kepler-std-display', georgia, serif;
+$minor: 'Lato';
+
+/* Colors */
+$solid-nearly-black: rgb(20, 20, 20);
+$haze: #ECECEC;
+$porcelain: #ECF0F1;
+$darkLynch: #30363D;
+$midLynch: #56626E;
+$lightLynch: #A5BAD1;
+$silver: #BDC3C7;
+$lynch: #6C7A89;
+$azure: azure;
+$nav-height: 60px;
+$gossip: #87D37C; // light, pale green
+$jade: #00B16A; // primary green, looks good against darkLynch background
+$cinnabar: #E74C3C; // secondary red
+
+/* Common Variables */
+$border-radius: 4px;
+
+body {
+  background-color: #141414;
+}
+
+* {
+  font-family: $minor, sans-serif;
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  &:link {
+    text-decoration: none;
+    color: white;
+  }
+  &:visited {
+    text-decoration: none;
+    color: white;
+  }
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:active {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+.transparent {
+  opacity: 0.9;
+}
+
+.white-background {
+  background-color: #FFFFFF !important;
+}
+
+.haze-background {
+  background-color: $haze !important;
+}
+
+.rotate {
+
+  /* Safari */
+  -webkit-transform: rotate(-90deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-90deg);
+
+  /* IE */
+  -ms-transform: rotate(-90deg);
+
+  /* Opera */
+  -o-transform: rotate(-90deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
