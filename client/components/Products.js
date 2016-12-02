@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Product from './Product';
 import Filter from './Filter';
-import Sidebar from './Sidebar';
 
 const Products = props => {
   var productList = props.products.map((product, i) => {
