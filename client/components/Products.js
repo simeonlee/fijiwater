@@ -4,7 +4,7 @@ import Filter from './Filter';
 import Sidebar from './Sidebar';
 
 const Products = props => {
-  var products = props.products.map((product, i) => {
+  var productList = props.products.map((product, i) => {
     return (
       <Product {...product} key={i} />
     )
@@ -12,8 +12,9 @@ const Products = props => {
   return (
     <div className="products">
       <Filter />
-      <Sidebar />
-      {products}
+      <div className="product-list">
+        {productList}
+      </div>
     </div>
   )
 }
