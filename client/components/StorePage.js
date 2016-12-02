@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Nav from './Nav';
-import Filter from './Filter';
-import Sidebar from './Sidebar';
 import Products from './Products';
+
 
 export default class Home extends Component {
   constructor(props) {
@@ -65,10 +64,9 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="storepage">
         <Nav />
-        <Filter />
-        <Sidebar />
+        <div className="landing"></div>
         <Products products={this.state.products} />
       </div>
     )
