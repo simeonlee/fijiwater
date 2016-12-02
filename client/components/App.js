@@ -14,9 +14,7 @@ export default class App extends Component {
     return (
       <div>
         <Router history={browserHistory}>
-          <Route path="/" component={RouterContainer}>
-            <IndexRoute component={StorePage}/>
-            <Route path="/" component={StorePage}/>
+          <Route path="/" component={StorePage}>
           </Route>
         </Router>
       </div>
