@@ -16,7 +16,7 @@ export default class Home extends Component {
       pageTitle: null, // "Bottled Water Accessories | FIJI Water",
       vanityUrl: null, // extras
       extraInfo: null, // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
-      products: null,
+      products: [],
       productCount: null, // 6
       bannerImage: null,
       bannerImageMobile: null,
@@ -57,8 +57,6 @@ export default class Home extends Component {
           priority,
           state,
         });
-
-        console.log(this.state.site);
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +69,7 @@ export default class Home extends Component {
         <Nav />
         <Filter />
         <Sidebar />
-        <Products />
+        <Products products={this.state.products} />
       </div>
     )
   }

@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import Product from './Product';
 
-export default class Products extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
+const Products = props => {
+  var products = props.products.map((product, i) => {
     return (
-      <div className="products">
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-      </div>
+      <Product product={product} key={i} />
     )
-  }
+  });
+  return (
+    <div className="products">
+      {products}
+    </div>
+  )
 }
+
+export default Products;
