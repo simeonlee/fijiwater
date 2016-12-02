@@ -10,38 +10,55 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      storePageSourceUrl: 'http://sneakpeeq-sites.s3.amazonaws.com/interviews/ce/feeds/store.js',
+      site: null, // "fijiwater"
+      name: null, // "Extras"
+      pageTitle: null, // "Bottled Water Accessories | FIJI Water",
+      vanityUrl: null, // extras
+      extraInfo: null, // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
       products: null,
+      productCount: null, // 6
       bannerImage: null,
       bannerImageMobile: null,
-      extraInfo: null, // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
-      name: null, // "Extras"
-      site: null, // "fijiwater"
-      pageTitle: null, // "Bottled Water Accessories | FIJI Water",
       priority: null, // 17
-      productCount: null, // 6
-      vanityUrl: null, // extras
       state: null, // NON_PUBLISHED
     }
   }
 
   componentDidMount() {
-    axios.get('http://sneakpeeq-sites.s3.amazonaws.com/interviews/ce/feeds/store.js')
+    axios.get(this.state.storePageSourceUrl)
       .then((response) => {
         var response = JSON.parse(response.request.response);
         // for some reason this   ^^^^^^^^^^^^^^^^^^^^^^^^^
         // was the only location products could be found
 
+        var site = response.site;
+        var name = response.name;
+        var pageTitle = response.pageTitle;
+        var vanityUrl = response.vanityUrl;
+        var extraInfo = response.extraInfo;
         var products = response.products;
+        var productCount = response.productCount;
         var bannerImage = 'http://sneakpeeq-sites.s3.amazonaws.com/' + response.bannerImage.ref;
         var bannerImageMobile = 'http://sneakpeeq-sites.s3.amazonaws.com/' + response.bannerImageMobile.ref;
-        var extraInfo = response.extraInfo; 
-        var name = response.name;
-        var site = response.site;
-        var pageTitle = response.pageTitle;
         var priority = response.priority;
-        var productCount = response.productCount;
-        var vanityUrl = response.vanityUrl;
         var state = response.state;
+
+        this.setState({
+          site,
+          name,
+          pageTitle,
+          vanityUrl,
+          extraInfo,
+          products,
+          productCount,
+          bannerImage,
+          bannerImageMobile,
+          priority,
+          state,
+        });
+
+        console.log(this.state.site);
       })
       .catch((error) => {
         console.log(error);
