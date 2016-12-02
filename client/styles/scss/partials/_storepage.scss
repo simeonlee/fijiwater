@@ -1,0 +1,41 @@
+.landing {
+  height: 100%;
+  height: 100vh;
+  width: 100%;
+  width: 100vw;
+  background: #111;
+  background: linear-gradient(rgba(255, 255, 255, 0) 40%, #111 80%), url('http://sneakpeeq-sites.s3.amazonaws.com/fijiwater/images/extras-bg-final.jpg') no-repeat center top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.products {
+  height: 100%;
+  height: 100vh;
+  width: 100%;
+  width: 100vw;
+  background: #111;
+  display: flex;
+  align-items: top;
+  flex-wrap: wrap;
+}
+
+.product {
+  width: 20%;
+  width: 20vw;
+  color: white;
+  font-size: 20px;
+}
+
+.product-image {
+  // height: 20%;
+  // height: 20vh;
+  width: 16%;
+  width: 16vw;
+}
+
+.sidebar {
+  
+}
