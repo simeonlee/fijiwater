@@ -34,8 +34,11 @@
   font-weight: 100;
   margin: 0;
   cursor: pointer;
-  &.black {
-    color: black;
+  &.transformed {
+    color: #228EC5;
+  }
+  &.untransformed {
+    color: white;
   }
 }
 
