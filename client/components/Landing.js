@@ -23,9 +23,9 @@ const Landing = props => {
   // });
   return (
     <div style={landing}>
-      <div className="extra-info wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">{props.extraInfo}</div>
-      <div className="mini-landing-title wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">{props.miniTitle}</div>
-      <div className="landing-arrow wow fadeInDown" data-wow-duration="1s" data-wow-delay="1s"><img src={arrow} /></div>
+      <div className="extra-info wow fadeIn" data-wow-duration="0.5s" data-wow-delay="1s">{props.extraInfo}</div>
+      <div className="mini-landing-title wow fadeIn" data-wow-duration="0.5s" data-wow-delay="1s">{props.miniTitle}</div>
+      <div className="landing-arrow wow fadeInDown" data-wow-duration="0.5s" data-wow-delay="0.5s"><img src={arrow} /></div>
     </div>
   )
 }
