@@ -61,6 +61,25 @@
   }
 }
 
+@keyframes cart-shrink {
+  0% {
+    width: 40px;
+  }
+  100% {
+    width: 30px;
+  }
+}
+
+@keyframes cart-enlarge {
+  0% {
+    width: 30px;
+  }
+  100% {
+    width: 40px;
+
+  }
+}
+
 // @keyframes nav-text-shrink {
 //   0% {
 //     font-size: 20px;
