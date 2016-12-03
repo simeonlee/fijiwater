@@ -40,12 +40,18 @@
 }
 
 .logo {
-  font-size: 24px;
   margin: 0;
+  cursor: pointer;
+  img {
+    width: 70px;
+  }
   @include for-tablet-landscape-up {
     margin-right: 50px;
     margin-left: 6%;
     font-size: 32px;
+    img {
+      width: 80px;
+    }
   }
 }
 
