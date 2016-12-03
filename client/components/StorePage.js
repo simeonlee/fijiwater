@@ -7,24 +7,52 @@ import Products from './Products';
 
 export default class Home extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       storePageSourceUrl: 'http://sneakpeeq-sites.s3.amazonaws.com/interviews/ce/feeds/store.js',
-      site: null, // "fijiwater"
-      name: null, // "Extras"
-      pageTitle: null, // "Bottled Water Accessories | FIJI Water",
-      vanityUrl: null, // extras
-      extraInfo: null, // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
+      site: '', // "fijiwater"
+      name: '', // "Extras"
+      pageTitle: '', // "Bottled Water Accessories | FIJI Water",
+      vanityUrl: '', // extras
+      extraInfo: '', // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
       products: [],
-      productCount: null, // 6
-      bannerImage: null,
-      bannerImageMobile: null,
-      priority: null, // 17
-      state: null, // NON_PUBLISHED
-    }
+      productCount: 0, // 6
+      bannerImage: '',
+      bannerImageMobile: '',
+      priority: 0, // 17
+      state: 'NON_PUBLISHED', // NON_PUBLISHED
+      currentBgUrl: '',
+    };
+  }
+
+  render() {
+    console.log(this.state.currentBgUrl);
+    var landingStyle = {
+      height: window.innerHeight,
+      width: window.innerWidth,
+      backgroundImage: 'url(' + this.state.currentBgUrl + ')', // don't use css 'background' shorthand here, will wipe out attachment and size properties
+      backgroundAttachment: 'fixed',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center top',
+      backgroundSize: 'cover',
+    };
+    return (
+      <div className="storepage">
+        <Nav />
+        <div style={landingStyle} className="landing"></div>
+        <Products products={this.state.products} />
+      </div>
+    )
+  }
+
+  updateDimensions() {
+    var currentBgUrl = window.innerWidth > 900 ? this.state.bannerImage : this.state.bannerImageMobile;
+    this.setState({currentBgUrl});
   }
 
   componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener('resize', this.updateDimensions.bind(this));
     axios.get(this.state.storePageSourceUrl)
       .then((response) => {
         var response = JSON.parse(response.request.response);
@@ -56,19 +84,15 @@ export default class Home extends Component {
           priority,
           state,
         });
+
+        this.updateDimensions();
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  render() {
-    return (
-      <div className="storepage">
-        <Nav />
-        <div className="landing"></div>
-        <Products products={this.state.products} />
-      </div>
-    )
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions.bind(this));
   }
 }

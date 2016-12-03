@@ -1,17 +1,22 @@
 .landing {
-  height: 80%;
-  height: 80vh;
-  width: 100%;
-  width: 100vw;
-  background: #fff;
-  background: linear-gradient(rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.6) 75%, rgba(255, 255, 255, 1.0) 100%), url('http://sneakpeeq-sites.s3.amazonaws.com/fijiwater/images/mobile-hero-final.jpg') no-repeat center top;
-  @include for-tablet-landscape-up {
-    background: linear-gradient(rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.6) 75%, rgba(255, 255, 255, 1.0) 100%), url('http://sneakpeeq-sites.s3.amazonaws.com/fijiwater/images/extras-bg-final.jpg') no-repeat center top;
-  }
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  // height: 100%;
+  // height: 100vh;
+  // width: 100%;
+  // width: 100vw;
+  // margin: 0;
+  // padding: 0;
+  // background: #fff;
+  // background: linear-gradient(rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.6) 75%, rgba(255, 255, 255, 1.0) 100%), url('http://sneakpeeq-sites.s3.amazonaws.com/fijiwater/images/mobile-hero-final.jpg') no-repeat center top;
+  // @include for-tablet-landscape-up {
+  //   background: linear-gradient(rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.6) 75%, rgba(255, 255, 255, 1.0) 100%), url('http://sneakpeeq-sites.s3.amazonaws.com/fijiwater/images/extras-bg-final.jpg') no-repeat center top;
+  // }
+  // background-attachment: fixed;
+  // background-position: center top;
+  // background-repeat: no-repeat;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
 }
 
 .products {
