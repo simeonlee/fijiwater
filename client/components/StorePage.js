@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Nav from './Nav';
+import Landing from './Landing';
 import Products from './Products';
-
 
 export default class Home extends Component {
   constructor(props) {
@@ -26,20 +26,14 @@ export default class Home extends Component {
   }
 
   render() {
-    console.log(this.state.currentBgUrl);
-    var landingStyle = {
-      height: window.innerHeight,
-      width: window.innerWidth,
-      backgroundImage: 'url(' + this.state.currentBgUrl + ')', // don't use css 'background' shorthand here, will wipe out attachment and size properties
-      backgroundAttachment: 'fixed',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center top',
-      backgroundSize: 'cover',
-    };
     return (
       <div className="storepage">
-        <Nav />
-        <div style={landingStyle} className="landing"></div>
+        <Nav pageTitle={this.state.pageTitle} />
+        <Landing
+          currentBgUrl={this.state.currentBgUrl}
+          extraInfo={this.state.extraInfo}
+          miniTitle={this.state.name}
+        />
         <Products products={this.state.products} />
       </div>
     )

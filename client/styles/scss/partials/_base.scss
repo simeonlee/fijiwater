@@ -1,6 +1,6 @@
 /* Typefaces */
-$major: 'kepler-std-display', georgia, serif;
-$minor: 'Lato';
+$major: Helvetica, Arial, Sans-Serif;
+$minor: 'Lato', Arial, Sans-Serif;
 
 /* Colors */
 $solid-nearly-black: rgb(20, 20, 20);
@@ -43,7 +43,7 @@ html, body {
 }
 
 * {
-  font-family: $minor, sans-serif;
+  font-family: $minor;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }

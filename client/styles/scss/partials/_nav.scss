@@ -1,25 +1,69 @@
-nav {
-  z-index: 9999999;
-  letter-spacing: 1.2px;
-  div {
-    background-color: white;
-    color: black !important;
+.nav {
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  width: 100vw;
+  height: 20%;
+  height: 20vh;
+  // background-color: rgba(255, 255, 255, 0.6);
+  // padding: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  @include for-tablet-landscape-up {
+    justify-content: flex-start;
   }
 }
 
-nav button {
-  border: 0 !important;
+.nav-text {
+  color: rgba(220, 220, 220, 1.0);
+  font-family: $major;
+  font-weight: 100;
+  margin: 0;
+  cursor: pointer;
 }
 
-.nav-link {
-  color: black !important;
+.nav-selection {
+  font-size: 20px;
+  display: none;
+  margin: 0;
+  // position: absolute;
+  @include for-tablet-landscape-up {
+    position: relative;
+    display: inline;
+    margin: 20px;
+    visibility: visible;
+  }
 }
 
 .logo {
-  color: black;
-  font-size: 30px;
-  font-family: $major, serif;
-  letter-spacing: 1.5px !important;
+  font-size: 24px;
+  margin: 0;
+  @include for-tablet-landscape-up {
+    margin-right: 50px;
+    margin-left: 6%;
+    font-size: 32px;
+  }
+}
+
+// nav {
+  // z-index: 9999999;
+  // letter-spacing: 1.2px;
+  // div {
+  //   background-color: white;
+  //   color: black !important;
+  // }
+// }
+
+// nav button {
+//   border: 0 !important;
+// }
+
+.nav-link {
+  color: black !important;
 }
 
 .navbar-brand {
