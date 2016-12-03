@@ -47,6 +47,7 @@ export default class Home extends Component {
       ],
       sortBy: 'Featured',
       navTransformed: false, // set to true after scroll a certain distance
+      updateScroll: true,
     };
   }
 
@@ -182,6 +183,13 @@ export default class Home extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+
+
+
+    setInterval(() => {
+      this.handleScroll();
+    }, 500)
   }
 
   componentWillUnmount() {
@@ -206,15 +214,15 @@ export default class Home extends Component {
   }
 
   handleScroll() {
-    if (this.getScrollOffsets().y > 400) {
-      this.setState({
-        navTransformed: true,
-      });
-    } else {
-      this.setState({
-        navTransformed: false,
-      });
-    }
+    console.log(this.getScrollOffsets().y);
+    this.updateScrollState();
+    // if (this.state.updateScroll) {
+      // setTimeout(() => {
+      //   this.setState({
+      //     updateScroll: true,
+      //   })
+      // }, 500); // optimize timing of scroll updates to not overload renders
+    // }
 
     // let scrollTop = event.srcElement.body.scrollTop,
     //     itemTranslate = Math.min(0, scrollTop/3 - 60);
@@ -223,5 +231,19 @@ export default class Home extends Component {
     //   transform: itemTranslate
     // });
     // console.log()
+  }
+
+  updateScrollState() {
+    if (this.getScrollOffsets().y > 300) {
+      this.setState({
+        navTransformed: true,
+        updateScroll: false,
+      });
+    } else {
+      this.setState({
+        navTransformed: false,
+        updateScroll: false,
+      });
+    }
   }
 }

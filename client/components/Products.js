@@ -9,7 +9,7 @@ const Products = props => {
   // console.log(props.products);
   var productList = props.products.map((product, i) => {
     if (range.max === '+') {
-      console.log(product.defaultPriceInCents/100)
+      // console.log(product.defaultPriceInCents/100)
       if (product.defaultPriceInCents/100 >= range.min) {
         return (
           <Product {...product} key={i} />
@@ -23,7 +23,7 @@ const Products = props => {
       }
     }
   });
-  console.log(productList);
+  // console.log(productList);
   return (
     <div className="products">
       <PriceFilter
