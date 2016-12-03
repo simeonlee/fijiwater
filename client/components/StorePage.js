@@ -46,13 +46,17 @@ export default class Home extends Component {
         }
       ],
       sortBy: 'Featured',
+      navTransformed: false, // set to true after scroll a certain distance
     };
   }
 
   render() {
     return (
       <div className="storepage">
-        <Nav pageTitle={this.state.pageTitle} />
+        <Nav
+          pageTitle={this.state.pageTitle}
+          transformed={this.state.navTransformed}
+        />
         <Landing
           currentBgUrl={this.state.currentBgUrl}
           extraInfo={this.state.extraInfo}
@@ -140,6 +144,7 @@ export default class Home extends Component {
   componentDidMount() {
     this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions.bind(this));
+    window.addEventListener('scroll', this.handleScroll.bind(this));
     axios.get(this.state.storePageSourceUrl)
       .then((response) => {
         var response = JSON.parse(response.request.response);
@@ -181,5 +186,42 @@ export default class Home extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateDimensions.bind(this));
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  getScrollOffsets() {
+    var doc = document, w = window;
+    var x, y, docEl;
+    
+    if ( typeof w.pageYOffset === 'number' ) {
+      x = w.pageXOffset;
+      y = w.pageYOffset;
+    } else {
+      docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')?
+              doc.documentElement: doc.body;
+      x = docEl.scrollLeft;
+      y = docEl.scrollTop;
+    }
+    return {x:x, y:y};
+  }
+
+  handleScroll() {
+    if (this.getScrollOffsets().y > 400) {
+      this.setState({
+        navTransformed: true,
+      });
+    } else {
+      this.setState({
+        navTransformed: false,
+      });
+    }
+
+    // let scrollTop = event.srcElement.body.scrollTop,
+    //     itemTranslate = Math.min(0, scrollTop/3 - 60);
+
+    // this.setState({
+    //   transform: itemTranslate
+    // });
+    // console.log()
   }
 }
