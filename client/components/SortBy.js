@@ -28,8 +28,8 @@ export default class SortBy extends Component {
       height: '6px',
       opacity: '0.6',
       margin: '1px 3px',
-      msTransform: this.state.menuOpen ? 'rotate(180deg)' : 'rotate(0deg)', /* IE 9 */
-      webkitTransform: this.state.menuOpen ? 'rotate(180deg)' : 'rotate(0deg)', /* Chrome, Safari, Opera */
+      MsTransform: this.state.menuOpen ? 'rotate(180deg)' : 'rotate(0deg)', /* IE 9 */
+      WebkitTransform: this.state.menuOpen ? 'rotate(180deg)' : 'rotate(0deg)', /* Chrome, Safari, Opera */
       transform: this.state.menuOpen ? 'rotate(180deg)' : 'rotate(0deg)',
     };
     return (

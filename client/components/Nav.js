@@ -7,7 +7,7 @@ const Nav = props => {
   return (
     <div className={'nav' + (props.transformed ? ' transformed' : ' untransformed')}>
       <div className="logo wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
-        <img className={'logo-img' + (props.transformed ? ' transformed' : ' untransformed')} src={props.transformed ? logoNeg : logo} />
+        <img className={'logo-img' + (props.transformed ? ' transformed' : ' untransformed')} src={logo} />
       </div>
       <div className={'nav-text wow fadeInLeft' + (props.transformed ? ' transformed' : ' untransformed')} data-wow-duration="0.5s" data-wow-delay="1s">Water</div>
       <div className={'nav-text wow fadeInLeft' + (props.transformed ? ' transformed' : ' untransformed')} data-wow-duration="0.5s" data-wow-delay="1s">Extras</div>

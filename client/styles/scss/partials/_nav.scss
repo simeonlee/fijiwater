@@ -27,7 +27,7 @@
 }
 
 .nav-text {
-  color: rgba(220, 220, 220, 1.0);
+  color: white;
   font-family: $major;
   font-weight: 100;
   margin: 0;
@@ -36,16 +36,8 @@
   display: none;
   margin: 0;
   &.transformed {
-    color: #228EC5;
-    // animation-name: nav-text-shrink;
-    // animation-fill-mode: both;
-    // animation-duration: 500ms;
   }
   &.untransformed {
-    color: white;
-    // animation-name: nav-text-enlarge;
-    // animation-fill-mode: both;
-    // animation-duration: 500ms;
   }
   @include for-tablet-landscape-up {
     position: relative;
@@ -58,89 +50,23 @@
 .logo {
   margin: 0;
   cursor: pointer;
-  .logo-img {
-    width: 70px;
-    @include for-tablet-landscape-up {
-      margin-right: 50px;
-      &.transformed {
-        animation-name: logo-shrink;
-        animation-fill-mode: both;
-        animation-duration: 500ms;
-      }
-      &.untransformed {
-        animation-name: logo-enlarge;
-        animation-fill-mode: both;
-        animation-duration: 500ms;
-      }
-    }
+  @include for-tablet-landscape-up {
+    margin: 0 4% 0 10%;
+  }
+}
+
+.logo-img {
+  width: 70px;
+  &.transformed {
+    animation-name: logo-shrink;
+    animation-fill-mode: both;
+    animation-duration: 500ms;
+  }
+  &.untransformed {
+    animation-name: logo-enlarge;
+    animation-fill-mode: both;
+    animation-duration: 500ms;
   }
   @include for-tablet-landscape-up {
-
-    margin-left: 6%;
-    // img {
-      // width: 80px;
-    // }
   }
-}
-
-// nav {
-  // z-index: 9999999;
-  // letter-spacing: 1.2px;
-  // div {
-  //   background-color: white;
-  //   color: black !important;
-  // }
-// }
-
-// nav button {
-//   border: 0 !important;
-// }
-
-.nav-link {
-  color: black !important;
-}
-
-.navbar-brand {
-  height: $nav-height;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-left, .navbar-right {
-  width: 40%;
-}
-
-.nav > li {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* line height is 16px so add 44px top and bottom to equal the new .navbar-brand 60px height */
-.nav > li > a {
-  padding-top: 22px;
-  padding-bottom: 22px;
-}
-.navbar-toggle {
-  padding: 0;
-  margin: 25px 15px 25px 0;
-}
-
-.wrap {
-  border: 0 !important;
-  border-radius: 0 !important;
-}
-
-.navbar-collapse {
-  border: 0px solid rgba(255, 255, 255, 0.0) !important;
-}
-
-.nav-active {
-  box-shadow: 0 2px 0 0 white;
-  // box-shadow: 0 2px 0 0 $lynch;
-}
-
-.navbar-nav > li > .dropdown-menu {
-  z-index: 9999999;
 }
