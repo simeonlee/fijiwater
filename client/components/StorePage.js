@@ -102,9 +102,34 @@ export default class Home extends Component {
   }
 
   onSortSelection(e) {
-    this.setState({
-      sortBy: e.target.innerHTML
+    var sortBy = e.target.innerHTML;
+    console.log(this.state.products);
+    this.setState({sortBy});
+    // sort products array
+    var products = this.state.products;
+    var toggleComparison = 1; // 1 for don't toggle, -1 for toggle
+    if (sortBy === 'Featured') {
+      var param = 'ordinal';
+    } else if (sortBy === 'Name') {
+      var param = 'name';
+    } else if (sortBy === 'Price - low to high') {
+      var param = 'defaultPriceInCents';
+    } else if (sortBy === 'Price - high to low') {
+      var param = 'defaultPriceInCents';
+      toggleComparison = -1;
+    } else if (sortBy === 'Newest') {
+      var param = 'createdAt';
+      toggleComparison = -1;
+    };
+    products.sort((a, b) => {
+      if (a[param] < b[param]) {
+        return -1 * toggleComparison; // toggle, if activated, just reverses the sign
+      } else if (a[param] > b[param]) {
+        return 1 * toggleComparison;
+      }
+      return 0;
     });
+    this.setState({products});
   }
 
   updateDimensions() {
