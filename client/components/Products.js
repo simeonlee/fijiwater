@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Product from './Product';
 import PriceFilter from './PriceFilter';
+import SortBy from './SortBy';
 
 const Products = props => {
   var range = props.filterPriceRange;
@@ -30,7 +31,13 @@ const Products = props => {
         onFilterSelection={props.onFilterSelection}
         onFilterClear={props.onFilterClear}
         range={range}
+        filters={props.filters}
       />
+      <SortBy
+        sortBy={props.sortBy}
+        onSortSelection={props.onSortSelection}
+      />
+      <div className="section-title">{props.storeSection}</div>
       <div className="product-list">
         {productList}
       </div>

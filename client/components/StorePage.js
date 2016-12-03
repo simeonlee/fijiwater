@@ -28,6 +28,24 @@ export default class Home extends Component {
         min: 0,
         max: '+'
       },
+      filters: [
+        {
+          min: 0,
+          max: 15,
+          text: 'Up to $15',
+        },
+        {
+          min: 15,
+          max: 25,
+          text: '$15 - $25',
+        },
+        {
+          min: 25,
+          max: '+',
+          text: 'Over $25',
+        }
+      ],
+      sortBy: 'Featured',
     };
   }
 
@@ -46,6 +64,10 @@ export default class Home extends Component {
           onFilterSelection={this.onFilterSelection.bind(this)}
           onFilterClear={this.onFilterClear.bind(this)}
           filterPriceRange={this.state.filterPriceRange}
+          storeSection={this.state.name}
+          filters={this.state.filters}
+          sortBy={this.state.sortBy}
+          onSortSelection={this.onSortSelection.bind(this)}
         />
       </div>
     )
@@ -77,6 +99,12 @@ export default class Home extends Component {
     setTimeout(() => {
       console.log(this.state.filterPriceRange);
     },200)
+  }
+
+  onSortSelection(e) {
+    this.setState({
+      sortBy: e.target.innerHTML
+    });
   }
 
   updateDimensions() {
