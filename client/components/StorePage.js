@@ -4,6 +4,7 @@ import axios from 'axios';
 import Nav from './Nav';
 import Landing from './Landing';
 import Products from './Products';
+import PriceFilter from './PriceFilter';
 
 export default class Home extends Component {
   constructor(props) {
@@ -22,6 +23,11 @@ export default class Home extends Component {
       priority: 0, // 17
       state: 'NON_PUBLISHED', // NON_PUBLISHED
       currentBgUrl: '',
+      filterOn: false,
+      filterPriceRange: {
+        min: 0,
+        max: '+'
+      },
     };
   }
 
@@ -34,9 +40,43 @@ export default class Home extends Component {
           extraInfo={this.state.extraInfo}
           miniTitle={this.state.name}
         />
-        <Products products={this.state.products} />
+        <Products
+          products={this.state.products}
+          filterOn={this.state.filterOn}
+          onFilterSelection={this.onFilterSelection.bind(this)}
+          onFilterClear={this.onFilterClear.bind(this)}
+          filterPriceRange={this.state.filterPriceRange}
+        />
       </div>
     )
+  }
+
+  onFilterSelection(e) {
+    var range = e.target.className.split(' ').slice(1,3);
+    this.setState({
+      filterOn: true,
+      filterPriceRange: {
+        min: parseInt(range[0]),
+        max: range[1] === '+' ? range[1] : parseInt(range[1]),
+      }
+    });
+    setTimeout(() => {
+      console.log(this.state.filterPriceRange);
+    },200)
+  }
+
+  onFilterClear(e) {
+    this.setState({
+      filterOn: false,
+      filterPriceRange: {
+        min: 0,
+        max: '+',
+      },
+    });
+    console.log('Cleared filter');
+    setTimeout(() => {
+      console.log(this.state.filterPriceRange);
+    },200)
   }
 
   updateDimensions() {
