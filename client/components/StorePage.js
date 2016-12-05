@@ -5,6 +5,8 @@ import Nav from './Nav';
 import Landing from './Landing';
 import Products from './Products';
 import PriceFilter from './PriceFilter';
+import Footer from './Footer';
+import Cart from './Cart';
 
 export default class Home extends Component {
   constructor(props) {
@@ -48,7 +50,10 @@ export default class Home extends Component {
       sortBy: 'Featured',
       navTransformed: false, // set to true after scroll a certain distance
       updateScroll: true,
+      cart: [],
+      cartVisible: false,
     };
+    this.cartTimeout;
   }
 
   render() {
@@ -57,6 +62,14 @@ export default class Home extends Component {
         <Nav
           pageTitle={this.state.pageTitle}
           transformed={this.state.navTransformed}
+          toggleCartVisibility={this.toggleCartVisibility.bind(this)}
+        />
+        <Cart
+          products={this.state.products}
+          cart={this.state.cart}
+          transformed={this.state.navTransformed}
+          visible={this.state.cartVisible}
+          removeFromCart={this.removeFromCart.bind(this)}
         />
         <Landing
           currentBgUrl={this.state.currentBgUrl}
@@ -73,9 +86,49 @@ export default class Home extends Component {
           filters={this.state.filters}
           sortBy={this.state.sortBy}
           onSortSelection={this.onSortSelection.bind(this)}
+          addToCart={this.addToCart.bind(this)}
         />
+        <Footer />
       </div>
     )
+  }
+
+  toggleCartVisibility() {
+    var visibility = this.state.cartVisible;
+    this.setState({
+      cartVisible: !visibility,
+    });
+    window.clearTimeout(this.cartTimeout);
+  }
+
+  displayCart() {
+    this.setState({cartVisible: true});
+  }
+
+  hideCart() {
+    this.setState({cartVisible: false});
+  }
+
+  addToCart(e) {
+    var id = e.currentTarget.getAttribute('data-product-id'); // get product id
+    this.toggleProductInCart(id);
+    this.displayCart(); // when you add item to cart, show cart
+    this.cartTimeout = setTimeout(this.hideCart.bind(this), 4000); // hide cart after 5 seconds
+  }
+
+  removeFromCart(e) {
+    var id = e.currentTarget.getAttribute('data-product-id'); // get product id
+    this.toggleProductInCart(id);
+  }
+
+  toggleProductInCart(id) {
+    var cart = this.state.cart;
+    if (cart.indexOf(id) > -1) {
+      cart.splice(cart.indexOf(id), 1);
+    } else {
+      cart.push(id);
+    }
+    this.setState({cart});
   }
 
   onFilterSelection(e) {
@@ -89,7 +142,7 @@ export default class Home extends Component {
     });
     setTimeout(() => {
       console.log(this.state.filterPriceRange);
-    },200)
+    },200);
   }
 
   onFilterClear(e) {
@@ -184,8 +237,7 @@ export default class Home extends Component {
         console.log(error);
       });
 
-
-
+    document.title = this.state.pageTitle; // set page title to conform to response
 
     setInterval(() => {
       this.handleScroll();
@@ -214,23 +266,7 @@ export default class Home extends Component {
   }
 
   handleScroll() {
-    console.log(this.getScrollOffsets().y);
     this.updateScrollState();
-    // if (this.state.updateScroll) {
-      // setTimeout(() => {
-      //   this.setState({
-      //     updateScroll: true,
-      //   })
-      // }, 500); // optimize timing of scroll updates to not overload renders
-    // }
-
-    // let scrollTop = event.srcElement.body.scrollTop,
-    //     itemTranslate = Math.min(0, scrollTop/3 - 60);
-
-    // this.setState({
-    //   transform: itemTranslate
-    // });
-    // console.log()
   }
 
   updateScrollState() {

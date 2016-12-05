@@ -82,13 +82,14 @@
 .cart {
   margin: 0 10% 0 0;
   cursor: pointer;
+  width: 40px;
   @include for-tablet-landscape-up {
     margin: 0 10% 0 0
   }
 }
 
 .cart-img {
-  width: 40px;
+  width: 100%;
   &.transformed {
     animation-name: cart-shrink;
     animation-fill-mode: both;

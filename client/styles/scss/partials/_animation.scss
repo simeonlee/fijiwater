@@ -80,6 +80,42 @@
   }
 }
 
+@keyframes cart-space-shrink {
+  0% {
+    top: 20%;
+  }
+  100% {
+    top: 12%;
+  }
+}
+
+@keyframes cart-space-enlarge {
+  0% {
+    top: 12%;
+  }
+  100% {
+    top: 20%;
+  }
+}
+
+@keyframes cart-appear {
+  0% {
+    display: none;
+  }
+  100% {
+    display: inline;
+  }
+}
+
+@keyframes cart-disappear {
+  0% {
+    display: inline;
+  }
+  100% {
+    display: none;
+  }
+}
+
 // @keyframes nav-text-shrink {
 //   0% {
 //     font-size: 20px;

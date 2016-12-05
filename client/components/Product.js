@@ -6,7 +6,7 @@ const Product = props => {
   price = '$' + price.slice(0, price.length - 2) + '.' + price[price.length - 2] + price[price.length - 1];
   // console.log(price);
   return (
-    <div className="product-list-item">
+    <div className="product-list-item" onClick={props.addToCart} data-product-id={props.id}>
       <div className="product-list-item-image">
         <img src={props.mainImage.ref} />
       </div>

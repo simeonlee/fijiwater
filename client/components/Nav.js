@@ -15,7 +15,7 @@ const Nav = props => {
         <div className={'nav-text wow fadeInLeft' + (props.transformed ? ' transformed' : ' untransformed')} data-wow-duration="0.5s" data-wow-delay="1s">Company</div>
         <div className={'nav-text wow fadeInLeft' + (props.transformed ? ' transformed' : ' untransformed')} data-wow-duration="0.5s" data-wow-delay="1s">Contact</div>
       </div>
-      <div className="cart wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+      <div className="cart wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s" onClick={props.toggleCartVisibility}>
         <img className={'cart-img' + (props.transformed ? ' transformed' : ' untransformed')} src={cart} />
       </div>
     </div>

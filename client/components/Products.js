@@ -12,13 +12,13 @@ const Products = props => {
       // console.log(product.defaultPriceInCents/100)
       if (product.defaultPriceInCents/100 >= range.min) {
         return (
-          <Product {...product} key={i} />
+          <Product {...product} key={i} addToCart={props.addToCart} />
         )
       }
     } else {
       if ((product.defaultPriceInCents/100 >= range.min) && (product.defaultPriceInCents/100 <= range.max)) {
         return (
-          <Product {...product} key={i} />
+          <Product {...product} key={i} addToCart={props.addToCart} />
         )
       }
     }
