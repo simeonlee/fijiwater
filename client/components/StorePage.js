@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet'; // document head manager
 import { Link } from 'react-router';
 import axios from 'axios';
 import Nav from './Nav';
@@ -53,12 +54,12 @@ export default class Home extends Component {
       cart: [],
       cartVisible: false,
     };
-    this.cartTimeout;
   }
 
   render() {
     return (
       <div className="storepage">
+        <Helmet title={this.state.pageTitle} />
         <Nav
           pageTitle={this.state.pageTitle}
           transformed={this.state.navTransformed}
@@ -113,6 +114,7 @@ export default class Home extends Component {
     var id = e.currentTarget.getAttribute('data-product-id'); // get product id
     this.toggleProductInCart(id);
     this.displayCart(); // when you add item to cart, show cart
+    window.clearTimeout(this.cartTimeout);
     this.cartTimeout = setTimeout(this.hideCart.bind(this), 4000); // hide cart after 5 seconds
   }
 
@@ -237,7 +239,7 @@ export default class Home extends Component {
         console.log(error);
       });
 
-    document.title = this.state.pageTitle; // set page title to conform to response
+    // document.title = this.state.pageTitle; // set page title to conform to response
 
     setInterval(() => {
       this.handleScroll();
