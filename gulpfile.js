@@ -15,6 +15,13 @@ const shell = require('gulp-shell');
 const plumber = require('gulp-plumber'); // Handle gulp.watch errors without throwing / cancelling nodemon
 const webpack = require('webpack-stream');
 const browserSync = require('browser-sync'); // Live reload of css and html through 'browser-sync'
+const jasmine = require('gulp-jasmine');
+
+gulp.task('test', () =>
+  gulp.src('spec/test.js')
+    // gulp-jasmine works on filepaths so you can't have any plugins before it 
+    .pipe(jasmine())
+);
 
 const config = {
   src: {

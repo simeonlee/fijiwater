@@ -59,7 +59,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="storepage">
-        <Helmet title={this.state.pageTitle} />
+        <Helmet title={this.state.pageTitle} />{/* dynamic document title */}
         <Nav
           pageTitle={this.state.pageTitle}
           transformed={this.state.navTransformed}
@@ -89,7 +89,7 @@ export default class Home extends Component {
           onSortSelection={this.onSortSelection.bind(this)}
           addToCart={this.addToCart.bind(this)}
         />
-        <Footer />
+        {/*<Footer />*/}
       </div>
     )
   }
