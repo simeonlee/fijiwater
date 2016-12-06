@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Helmet from 'react-helmet'; // document head manager
 import { Link } from 'react-router';
 import axios from 'axios';
@@ -8,52 +8,58 @@ import Products from './Products';
 import PriceFilter from './PriceFilter';
 import Footer from './Footer';
 import Cart from './Cart';
+import { connect } from 'react-redux';
+import * as actions from '../redux/reducer';
 
-export default class Home extends Component {
+class StorePage extends Component {
+  static propTypes = {
+
+  }
+
   constructor(props) {
     super(props);
-    this.state = {
-      storePageSourceUrl: 'http://sneakpeeq-sites.s3.amazonaws.com/interviews/ce/feeds/store.js',
-      site: '', // "fijiwater"
-      name: '', // "Extras"
-      pageTitle: '', // "Bottled Water Accessories | FIJI Water",
-      vanityUrl: '', // extras
-      extraInfo: '', // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
-      products: [],
-      productCount: 0, // 6
-      bannerImage: '',
-      bannerImageMobile: '',
-      priority: 0, // 17
-      state: 'NON_PUBLISHED', // NON_PUBLISHED
-      currentBgUrl: '',
-      filterOn: false,
-      filterPriceRange: {
-        min: 0,
-        max: '+'
-      },
-      filters: [
-        {
-          min: 0,
-          max: 15,
-          text: 'Up to $15',
-        },
-        {
-          min: 15,
-          max: 25,
-          text: '$15 - $25',
-        },
-        {
-          min: 25,
-          max: '+',
-          text: 'Over $25',
-        }
-      ],
-      sortBy: 'Featured',
-      navTransformed: false, // set to true after scroll a certain distance
-      updateScroll: true,
-      cart: [],
-      cartVisible: false,
-    };
+    // this.state = {
+      // storePageSourceUrl: 'http://sneakpeeq-sites.s3.amazonaws.com/interviews/ce/feeds/store.js',
+      // site: '', // "fijiwater"
+      // name: '', // "Extras"
+      // pageTitle: '', // "Bottled Water Accessories | FIJI Water",
+      // vanityUrl: '', // extras
+      // extraInfo: '', // "Purchase FIJI Water Accessories ranging from Signature Silver Sleeves...
+      // products: [],
+      // productCount: 0, // 6
+      // bannerImage: '',
+      // bannerImageMobile: '',
+      // priority: 0, // 17
+      // state: 'NON_PUBLISHED', // NON_PUBLISHED
+      // currentBgUrl: '',
+      // filterOn: false,
+      // filterPriceRange: {
+      //   min: 0,
+      //   max: '+'
+      // },
+      // filters: [
+      //   {
+      //     min: 0,
+      //     max: 15,
+      //     text: 'Up to $15',
+      //   },
+      //   {
+      //     min: 15,
+      //     max: 25,
+      //     text: '$15 - $25',
+      //   },
+      //   {
+      //     min: 25,
+      //     max: '+',
+      //     text: 'Over $25',
+      //   }
+      // ],
+      // sortBy: 'Featured',
+      // navTransformed: false, // set to true after scroll a certain distance
+      // updateScroll: true,
+      // cart: [],
+      // cartVisible: false,
+    // };
   }
 
   render() {
@@ -95,70 +101,63 @@ export default class Home extends Component {
   }
 
   toggleCartVisibility() {
-    var visibility = this.state.cartVisible;
-    this.setState({
-      cartVisible: !visibility,
-    });
+    // var visibility = this.state.cartVisible;
+    // this.setState({
+    //   cartVisible: !visibility,
+    // });
+    this.props.dispatch(actions.toggleCartVisibility());
     window.clearTimeout(this.cartTimeout);
   }
 
-  displayCart() {
-    this.setState({cartVisible: true});
-  }
+  // replaced with reducers
+  // displayCart() {
+  //   this.setState({cartVisible: true});
+  // }
 
-  hideCart() {
-    this.setState({cartVisible: false});
-  }
+  // hideCart() {
+  //   this.setState({cartVisible: false});
+  // }
 
   addToCart(e) {
     var id = e.currentTarget.getAttribute('data-product-id'); // get product id
-    this.toggleProductInCart(id);
-    this.displayCart(); // when you add item to cart, show cart
+    this.props.dispatch(actions.toggleProductInCart(id));
+    // this.toggleProductInCart(id);
+    // this.displayCart(); // when you add item to cart, show cart
+    this.props.dispatch(actions.displayCart());
     window.clearTimeout(this.cartTimeout);
-    this.cartTimeout = setTimeout(this.hideCart.bind(this), 4000); // hide cart after 5 seconds
+    // this.cartTimeout = setTimeout(this.hideCart.bind(this), 4000); // hide cart after 5 seconds
+    this.cartTimeout = setTimeout(this.props.dispatch(actions.hideCart), 4000); // hide cart after 5 seconds
+
   }
 
   removeFromCart(e) {
     var id = e.currentTarget.getAttribute('data-product-id'); // get product id
-    this.toggleProductInCart(id);
+    this.props.dispatch(actions.toggleProductInCart(id));
   }
 
-  toggleProductInCart(id) {
-    var cart = this.state.cart;
-    if (cart.indexOf(id) > -1) {
-      cart.splice(cart.indexOf(id), 1);
-    } else {
-      cart.push(id);
-    }
-    this.setState({cart});
-  }
+  // toggleProductInCart(id) {
+    // var cart = this.state.cart;
+    // if (cart.indexOf(id) > -1) {
+    //   cart.splice(cart.indexOf(id), 1);
+    // } else {
+    //   cart.push(id);
+    // }
+    // this.setState({cart});
+  // }
 
   onFilterSelection(e) {
     var range = e.target.className.split(' ').slice(1,3);
-    this.setState({
-      filterOn: true,
-      filterPriceRange: {
-        min: parseInt(range[0]),
-        max: range[1] === '+' ? range[1] : parseInt(range[1]),
-      }
-    });
-    setTimeout(() => {
-      console.log(this.state.filterPriceRange);
-    },200);
+    this.props.dispatch(actions.selectAFilter(range));
+    // setTimeout(() => {
+    //   console.log(this.state.filterPriceRange);
+    // },200);
   }
 
   onFilterClear(e) {
-    this.setState({
-      filterOn: false,
-      filterPriceRange: {
-        min: 0,
-        max: '+',
-      },
-    });
-    console.log('Cleared filter');
-    setTimeout(() => {
-      console.log(this.state.filterPriceRange);
-    },200)
+    this.props.dispatch(actions.clearAllFilters());
+    // setTimeout(() => {
+    //   console.log(this.state.filterPriceRange);
+    // },200)
   }
 
   onSortSelection(e) {
@@ -285,3 +284,31 @@ export default class Home extends Component {
     }
   }
 }
+
+var mapStateToProps = state => {
+  return {
+    storePageSourceUrl: state.reducer.storePageSourceUrl,
+    site: state.reducer.site,
+    name: state.reducer.name,
+    pageTitle: state.reducer.pageTitle,
+    vanityUrl: state.reducer.vanityUrl,
+    extraInfo: state.reducer.extraInfo,
+    products: state.reducer.products,
+    productCount: state.reducer.productCount,
+    bannerImage: state.reducer.bannerImage,
+    bannerImageMobile: state.reducer.bannerImageMobile,
+    priority: state.reducer.priority,
+    state: state.reducer.state,
+    currentBgUrl: state.reducer.currentBgUrl,
+    filterOn: state.reducer.filterOn,
+    filterPriceRange: state.reducer.filterPriceRange,
+    filters: state.reducer.filters,
+    sortBy: state.reducer.sortBy,
+    navTransformed: state.reducer.navTransformed,
+    updateScroll: state.reducer.updateScroll,
+    cart: state.reducer.cart,
+    cartVisible: state.reducer.cartVisible,
+  }
+}
+
+export default connect(mapStateToProps)(StorePage)
