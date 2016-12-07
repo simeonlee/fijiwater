@@ -4,7 +4,6 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
 
 module.exports = (app, express, passport) => {
   app.use(morgan('dev'));
