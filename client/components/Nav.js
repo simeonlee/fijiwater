@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from '../images/fiji-logo@2x.png';
 import cart from '../images/cart-icon@2x.png';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 const Nav = props => {
   return (
