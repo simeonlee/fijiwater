@@ -3,7 +3,7 @@
 ## Getting Started
 
 + Clone down this repo
-+ 'npm install' to install dependencies
++ 'npm install --production' to install dependencies (production flag installs only necessary packages)
 + 'gulp presentation' to build source files
 + Navigate to 'localhost:4568' in your browser
 
