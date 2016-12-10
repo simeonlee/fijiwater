@@ -12,48 +12,8 @@ const ngAnnotate = require('gulp-ng-annotate');
 const shell = require('gulp-shell');
 const plumber = require('gulp-plumber'); // Handle gulp.watch errors without throwing / cancelling nodemon
 const webpack = require('webpack-stream');
-
-if (process.env.NODE_ENV === 'development') {
-  const browserSync = require('browser-sync'); // Live reload of css and html through 'browser-sync'
-  const nodemon = require('gulp-nodemon');
-
-  /* DEV TOOLS */
-
-  gulp.task('lint', function() {
-    gulp.src('./client/**/*.js') //, './server/**/*.js' add to lint serverside js
-      .pipe(jshint())
-      .pipe(jshint.reporter('default'))
-      .pipe(jshint.reporter('fail'));
-  });
-
-  gulp.task('browser-sync', ['nodemon'], () => {
-    browserSync({
-      proxy: "localhost:5000",
-      files: config.src.css,
-      port: 3000,
-      // browser: "google chrome"
-    });
-  });
-
-  gulp.task('nodemon', (cb) => {
-    var started = false;
-
-    return nodemon({
-      script: 'server/server.js',
-      ext: 'html js'
-    })
-    .on('start', () => {
-      // avoid nodemon being started multiple times
-      if (!started) {
-        cb();
-        started = true;
-      }
-    })
-    .on('restart', () => {
-      console.log('nodemon restarted server!');
-    });
-  });
-}
+const browserSync = require('browser-sync'); // Live reload of css and html through 'browser-sync'
+const nodemon = require('gulp-nodemon');
 
 const config = {
   src: {
@@ -71,6 +31,43 @@ const config = {
     img: './dist/images/'
   }
 };
+
+/* DEV TOOLS */
+
+gulp.task('lint', function() {
+  gulp.src('./client/**/*.js') //, './server/**/*.js' add to lint serverside js
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('browser-sync', ['nodemon'], () => {
+  browserSync({
+    proxy: "localhost:5000",
+    files: config.src.css,
+    port: 3000,
+    // browser: "google chrome"
+  });
+});
+
+gulp.task('nodemon', (cb) => {
+  var started = false;
+
+  return nodemon({
+    script: 'server/server.js',
+    ext: 'html js'
+  })
+  .on('start', () => {
+    // avoid nodemon being started multiple times
+    if (!started) {
+      cb();
+      started = true;
+    }
+  })
+  .on('restart', () => {
+    console.log('nodemon restarted server!');
+  });
+});
 
 /* BUILD TASKS */
 
@@ -165,7 +162,7 @@ gulp.task('node', shell.task([
 
 /* DEV v. PROD */
 
-gulp.task('default', function() {
+gulp.task('dev', function() {
   runSequence(
     'set-dev',
     'build',
@@ -174,7 +171,7 @@ gulp.task('default', function() {
   );
 });
 
-gulp.task('presentation', function() {
+gulp.task('pres', function() {
   runSequence(
     'build',
     'webpack',
@@ -182,7 +179,7 @@ gulp.task('presentation', function() {
   );
 });
 
-gulp.task('production', function() {
+gulp.task('prod', function() {
   runSequence(
     'set-prod',
     'build',

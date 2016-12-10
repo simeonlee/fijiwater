@@ -2,9 +2,9 @@
 
 ## Getting Started
 
-+ Clone down this repo
-+ 'npm install --production' to install dependencies (production flag installs only necessary packages)
-+ 'gulp presentation' to build source files
++ Clone down this repo and navigate to the directory
++ Use command line and type 'npm install' to install dependencies (may take a minute)
++ Use command line and type 'gulp pres' to build source files
 + Navigate to 'localhost:4568' in your browser
 
 ## Primary Dependencies
