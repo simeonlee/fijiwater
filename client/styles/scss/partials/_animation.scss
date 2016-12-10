@@ -1,21 +1,3 @@
-@keyframes hover {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes solidify {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
 @keyframes nav-shrink {
   0% {
     height: 20%;
@@ -115,21 +97,3 @@
     display: none;
   }
 }
-
-// @keyframes nav-text-shrink {
-//   0% {
-//     font-size: 20px;
-//   }
-//   100% {
-//     font-size: 14px;
-//   }
-// }
-
-// @keyframes nav-text-enlarge {
-//   0% {
-//     font-size: 14px;
-//   }
-//   100% {
-//     font-size: 20px;
-//   }
-// }

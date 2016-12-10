@@ -6,7 +6,6 @@ import Nav from './Nav';
 import Landing from './Landing';
 import Products from './Products';
 import PriceFilter from './PriceFilter';
-import Footer from './Footer';
 import Cart from './Cart';
 
 export default class Home extends Component {
@@ -89,7 +88,6 @@ export default class Home extends Component {
           onSortSelection={this.onSortSelection.bind(this)}
           addToCart={this.addToCart.bind(this)}
         />
-        {/*<Footer />*/}
       </div>
     )
   }

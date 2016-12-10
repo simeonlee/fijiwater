@@ -20,12 +20,6 @@ const common = {
         include: path.resolve(__dirname, 'client'),
         exclude: /(node_modules|bower_components)/,
       },
-      // Disabling SCSS thru webpack for now (still gulping)
-      // {
-      //   test: /\.(scss|css)$/,
-      //   loader: 'style!css!sass?sourceMap',
-      //   exclude: /node_modules/,
-      // },
       {
         test: /\.(jpg|png)$/,
         loader: 'file',
@@ -44,8 +38,6 @@ const common = {
       '',
       '.js',
       '.jsx',
-      // '.sass',
-      // '.css',
     ],
   },
 }
@@ -75,7 +67,3 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 module.exports = validate(config);
-
-/**
- * devtool: 'eval', // http://webpack.github.io/docs/configuration.html#devtool
- */
