@@ -3,6 +3,7 @@ import Product from './Product';
 import PriceFilter from './PriceFilter';
 import SortBy from './SortBy';
 
+// Includes price filter, sort by, and products
 const Products = props => {
   var range = props.filterPriceRange;
   // console.log(props.filterPriceRange);

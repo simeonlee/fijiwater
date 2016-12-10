@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import arrow from '../images/down-arrow@2x.png';
 
+// This is the component that shows what the current product list is sorted by
 export default class SortBy extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +15,6 @@ export default class SortBy extends Component {
     this.setState({
       menuOpen: newState,
     });
-    setTimeout(() => {
-      console.log(this.state.menuOpen);
-    },250);
   }
 
   render() {

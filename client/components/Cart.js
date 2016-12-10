@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Modal that shows what products are in cart
 const Cart = props => {
   var cartList = props.cart.map((productId, i) => {
     var res = [];

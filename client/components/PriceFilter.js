@@ -1,5 +1,6 @@
 import React from 'react';
 
+// This is the component that shows the price filters, delivered through props
 const PriceFilter = props => {
   const title = props.filterOn 
     ? <div className="filter-title">Price<span className="filter-clear highlight" onClick={props.onFilterClear}>Clear</span></div>

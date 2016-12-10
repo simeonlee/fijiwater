@@ -92,113 +92,12 @@ export default class Home extends Component {
     )
   }
 
-  toggleCartVisibility() {
-    var visibility = this.state.cartVisible;
-    this.setState({
-      cartVisible: !visibility,
-    });
-    window.clearTimeout(this.cartTimeout);
-  }
-
-  displayCart() {
-    this.setState({cartVisible: true});
-  }
-
-  hideCart() {
-    this.setState({cartVisible: false});
-  }
-
-  addToCart(e) {
-    var id = e.currentTarget.getAttribute('data-product-id'); // get product id
-    this.toggleProductInCart(id);
-    this.displayCart(); // when you add item to cart, show cart
-    window.clearTimeout(this.cartTimeout);
-    this.cartTimeout = setTimeout(this.hideCart.bind(this), 4000); // hide cart after 5 seconds
-  }
-
-  removeFromCart(e) {
-    var id = e.currentTarget.getAttribute('data-product-id'); // get product id
-    this.toggleProductInCart(id);
-  }
-
-  toggleProductInCart(id) {
-    var cart = this.state.cart;
-    if (cart.indexOf(id) > -1) {
-      cart.splice(cart.indexOf(id), 1);
-    } else {
-      cart.push(id);
-    }
-    this.setState({cart});
-  }
-
-  onFilterSelection(e) {
-    var range = e.target.className.split(' ').slice(1,3);
-    this.setState({
-      filterOn: true,
-      filterPriceRange: {
-        min: parseInt(range[0]),
-        max: range[1] === '+' ? range[1] : parseInt(range[1]),
-      }
-    });
-    setTimeout(() => {
-      console.log(this.state.filterPriceRange);
-    },200);
-  }
-
-  onFilterClear(e) {
-    this.setState({
-      filterOn: false,
-      filterPriceRange: {
-        min: 0,
-        max: '+',
-      },
-    });
-    console.log('Cleared filter');
-    setTimeout(() => {
-      console.log(this.state.filterPriceRange);
-    },200)
-  }
-
-  onSortSelection(e) {
-    var sortBy = e.target.innerHTML;
-    console.log(this.state.products);
-    this.setState({sortBy});
-    // sort products array
-    var products = this.state.products;
-    var toggleComparison = 1; // 1 for don't toggle, -1 for toggle
-    if (sortBy === 'Featured') {
-      var param = 'ordinal';
-    } else if (sortBy === 'Name') {
-      var param = 'name';
-    } else if (sortBy === 'Price - low to high') {
-      var param = 'defaultPriceInCents';
-    } else if (sortBy === 'Price - high to low') {
-      var param = 'defaultPriceInCents';
-      toggleComparison = -1;
-    } else if (sortBy === 'Newest') {
-      var param = 'createdAt';
-      toggleComparison = -1;
-    };
-    products.sort((a, b) => {
-      if (a[param] < b[param]) {
-        return -1 * toggleComparison; // toggle, if activated, just reverses the sign
-      } else if (a[param] > b[param]) {
-        return 1 * toggleComparison;
-      }
-      return 0;
-    });
-    this.setState({products});
-  }
-
-  updateDimensions() {
-    var currentBgUrl = window.innerWidth > 900 ? this.state.bannerImage : this.state.bannerImageMobile;
-    this.setState({currentBgUrl});
-  }
-
+  // Upon mounting, set up some listeners for resize (responsive) and scroll (animations)
+  // as well as AJAX request to get store info and updating of state
   componentDidMount() {
     this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions.bind(this));
-    window.addEventListener('scroll', this.handleScroll.bind(this));
+    window.addEventListener('scroll', this.updateScrollState.bind(this));
     axios.get(this.state.storePageSourceUrl)
       .then((response) => {
         var response = JSON.parse(response.request.response);
@@ -237,16 +136,121 @@ export default class Home extends Component {
         console.log(error);
       });
 
-    // document.title = this.state.pageTitle; // set page title to conform to response
-
+    // Set scroll detection to repeat every .5 seconds to update nav size and property upon scroll
     setInterval(() => {
-      this.handleScroll();
+      this.updateScrollState();
     }, 500)
   }
 
+  // Remove listeners that were set up in componentWillMount
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateDimensions.bind(this));
-    window.removeEventListener('scroll', this.handleScroll.bind(this));
+    window.removeEventListener('scroll', this.updateScrollState.bind(this));
+  }
+
+  // Toggle display of cart modal
+  toggleCartVisibility() {
+    var visibility = this.state.cartVisible;
+    this.setState({
+      cartVisible: !visibility,
+    });
+    window.clearTimeout(this.cartTimeout);
+  }
+
+  // Display cart modal
+  displayCart() {
+    this.setState({cartVisible: true});
+  }
+
+  // Hide cart modal
+  hideCart() {
+    this.setState({cartVisible: false});
+  }
+
+  // Add clicked products to cart
+  addToCart(e) {
+    var id = e.currentTarget.getAttribute('data-product-id'); // get product id
+    this.toggleProductInCart(id);
+    this.displayCart(); // when you add item to cart, show cart
+    window.clearTimeout(this.cartTimeout);
+    this.cartTimeout = setTimeout(this.hideCart.bind(this), 4000); // hide cart after 5 seconds
+  }
+
+  // Remove clicked products to cart
+  removeFromCart(e) {
+    var id = e.currentTarget.getAttribute('data-product-id'); // get product id
+    this.toggleProductInCart(id);
+  }
+
+  // Toggle product's placement in cart
+  toggleProductInCart(id) {
+    var cart = this.state.cart;
+    if (cart.indexOf(id) > -1) {
+      cart.splice(cart.indexOf(id), 1);
+    } else {
+      cart.push(id);
+    }
+    this.setState({cart});
+  }
+
+  // Update state when user sets price filter
+  onFilterSelection(e) {
+    var range = e.target.className.split(' ').slice(1,3);
+    this.setState({
+      filterOn: true,
+      filterPriceRange: {
+        min: parseInt(range[0]),
+        max: range[1] === '+' ? range[1] : parseInt(range[1]),
+      }
+    });
+  }
+
+  // Update state when user clears price filter
+  onFilterClear(e) {
+    this.setState({
+      filterOn: false,
+      filterPriceRange: {
+        min: 0,
+        max: '+',
+      },
+    });
+  }
+
+  // Select and organize products by sorting filter
+  onSortSelection(e) {
+    var sortBy = e.target.innerHTML;
+    this.setState({sortBy});
+    // sort products array
+    var products = this.state.products;
+    var toggleComparison = 1; // 1 for don't toggle, -1 for toggle
+    if (sortBy === 'Featured') {
+      var param = 'ordinal';
+    } else if (sortBy === 'Name') {
+      var param = 'name';
+    } else if (sortBy === 'Price - low to high') {
+      var param = 'defaultPriceInCents';
+    } else if (sortBy === 'Price - high to low') {
+      var param = 'defaultPriceInCents';
+      toggleComparison = -1;
+    } else if (sortBy === 'Newest') {
+      var param = 'createdAt';
+      toggleComparison = -1;
+    };
+    products.sort((a, b) => {
+      if (a[param] < b[param]) {
+        return -1 * toggleComparison; // toggle, if activated, just reverses the sign
+      } else if (a[param] > b[param]) {
+        return 1 * toggleComparison;
+      }
+      return 0;
+    });
+    this.setState({products});
+  }
+
+  // Update component's knowledge of window dimensions
+  updateDimensions() {
+    var currentBgUrl = window.innerWidth > 900 ? this.state.bannerImage : this.state.bannerImageMobile;
+    this.setState({currentBgUrl});
   }
 
   getScrollOffsets() {
@@ -257,16 +261,13 @@ export default class Home extends Component {
       x = w.pageXOffset;
       y = w.pageYOffset;
     } else {
-      docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')?
-              doc.documentElement: doc.body;
+      docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')
+        ? doc.documentElement
+        : doc.body;
       x = docEl.scrollLeft;
       y = docEl.scrollTop;
     }
     return {x:x, y:y};
-  }
-
-  handleScroll() {
-    this.updateScrollState();
   }
 
   updateScrollState() {

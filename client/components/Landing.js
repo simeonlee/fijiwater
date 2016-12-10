@@ -1,6 +1,7 @@
 import React from 'react';
 import arrow from '../images/arrow@2x.png';
 
+// Landing page
 const Landing = props => {
   const landing = {
     height: window.innerHeight,
@@ -16,11 +17,6 @@ const Landing = props => {
     flexDirection: 'column',
     position: 'relative',
   };
-  // const extraInfo = props.extraInfo.split('. ').map(sentence => {
-  //   return (
-  //     <div className="extra-info">{sentence}</div>
-  //   )
-  // });
   return (
     <div style={landing}>
       <div className="extra-info wow fadeIn" data-wow-duration="0.5s" data-wow-delay="1s">{props.extraInfo}</div>
